@@ -35,7 +35,7 @@ USER laravel
 #   artisan:
 #     build:
 #       context: .
-#       dockerfile: dockerfiles/php.dockerfile
+#       dockerfile: dockerfiles/utility_php_artisan_dev.dockerfile
 #     volumes:
 #       - ./src:/var/www/html
 #     entrypoint: [ "php", "/var/www/html/artisan" ]

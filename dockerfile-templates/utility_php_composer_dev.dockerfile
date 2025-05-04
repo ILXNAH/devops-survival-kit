@@ -32,7 +32,7 @@ ENTRYPOINT [ "composer", "--ignore-platform-reqs" ]
 #   composer:
 #     build:
 #       context: .
-#       dockerfile: dockerfiles/composer.dockerfile
+#       dockerfile: dockerfiles/utility_php_composer_dev.dockerfile
 #     stdin_open: true
 #     tty: true
 #     volumes:
