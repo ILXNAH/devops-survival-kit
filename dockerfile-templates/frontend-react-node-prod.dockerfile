@@ -1,4 +1,4 @@
-# Node.js Frontend Dockerfile Template (React SPA)
+# Node.js Frontend Dockerfile Template  (React SPA - Multi-Stage Production Build)
 
 # Stage 1:
 # Build the React app
