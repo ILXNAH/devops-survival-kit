@@ -1,0 +1,15 @@
+# Linux Command Cheat Sheet
+
+# Switch to root
+sudo -i 
+
+# Switch back to normal user 
+su $(logname)
+
+# Clean all Zone.Identifier files from current dir (alias)
+cleanzone
+
+# Silence login banner (MOTD)
+touch ~/.hushlogin                      # For current user
+sudo touch /root/.hushlogin             # For root user
+
