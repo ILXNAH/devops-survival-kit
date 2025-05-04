@@ -1,4 +1,4 @@
-# Node.js REST API backend with MongoDB
+# Node.js Backend Dockerfile Template (REST API with MongoDB - Development Build)
 
 # Use a stable, small Node.js image
 # Alpine reduces image size and attack surface
