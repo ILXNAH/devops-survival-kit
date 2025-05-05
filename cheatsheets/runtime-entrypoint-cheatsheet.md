@@ -18,6 +18,7 @@
 ## 🔎 Quick Rule of Thumb
 
 ✅ **Distroless images** → ENTRYPOINT is preset (runtime already included).
+
 ❌ **Official language images** → No ENTRYPOINT, you must specify the runtime in CMD.
 
 ---
