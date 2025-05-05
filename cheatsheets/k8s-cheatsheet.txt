@@ -1,4 +1,3 @@
-
 # Kubernetes Minikube Express App — Cheat Sheet
 
 Start Minikube 

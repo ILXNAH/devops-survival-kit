@@ -1,18 +1,6 @@
 
 # DevOps Survival Kit - Bash Aliases Template
 
-# General aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias ls='ls --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias grep='grep --color=auto'
-
-# Safer remove
-alias rm='rm -i'
-
 # WSL Clean all Zone.Identifier files from current dir
 alias cleanzone='find . -exec bash -c '''cat "$1:Zone.Identifier" > /dev/null 2>&1 && { echo "Removing Zone.Identifier from $1"; rm "$1:Zone.Identifier"; }''' _ {} \;'
 
@@ -31,14 +19,12 @@ alias fixperms='chmod -R 777 .'
 # alias minisvc='minikube service'
 
 # Cheatsheets
-alias linux='cat /usr/local/share/cheatsheets/linux-commands.txt'
-alias k8s-cheat='cat /usr/local/share/cheatsheets/k8s-cheatsheet.txt'
+alias linux='cat /home/ilona/devops-survival-kit/cheatsheets/linux-commands.txt'
+alias k8s-cheat='cat /home/ilona/devops-survival-kit/cheatsheets/k8s-cheatsheet.txt'
 
 # # Docker clean-up
 # alias dockerclean='docker system prune -f'
 
-# Notification alias
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//''')"'
+# # Alias sync - into $(whoami)'s ~/.bashrc
+# alias alias-sync='sudo cp ~/.bash_aliases /root/.bash_aliases && echo "Aliases synced from $(whoami) to root."'
 
-# Alias sync
-alias alias-sync='sudo cp ~/.bash_aliases /root/.bash_aliases && echo "Aliases synced from $(whoami) to root."'
