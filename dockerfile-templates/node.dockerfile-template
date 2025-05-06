@@ -1,0 +1,24 @@
+
+# Node.js Dockerfile Template
+
+# Use a small official Node.js image
+FROM node:alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json (if exists) and install dependencies
+COPY package*.json ./
+RUN npm install --production
+
+# Copy the rest of the app code
+COPY . .
+
+# Environment variables will be passed at runtime (for flexibility)
+# Example: docker run -e APP_NAME=MyApp ...
+
+# Expose the port your app listens on (adjust as needed)
+EXPOSE 3000
+
+# Start the application
+CMD ["node", "app.js"]

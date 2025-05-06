@@ -16,7 +16,11 @@ alias fixperms='chmod -R 777 .'
 # alias kaf='kubectl apply -f'
 
 # # Minikube shortcut
-# alias minisvc='minikube service'
+# alias mini-up='minikube start'
+# alias mini-del='minikube delete'
+# alias mini-stat='minikube status'
+# alias mini-dash='minikube dashboard'
+# alias mini-svc='minikube service'
 
 # Cheatsheets
 alias linux='cat /home/ilona/devops-survival-kit/cheatsheets/linux-commands.txt'
