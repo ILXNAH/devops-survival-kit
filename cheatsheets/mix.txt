@@ -1,0 +1,131 @@
+Build image with tag myapp:1.0 & build arg for NODE_ENV set to "production".
+docker build –name myapp:1.0 ---build-arg NODE_ENV=production 
+
+Check how many layers your image has and their respective sizes
+docker history myapp:1.0
+
+minikube start // minikube delete // minikube status
+minikube start --driver=docker // minikube config set driver docker // minikube config view
+kubectl help
+kubectl get nodes // all // pods // deployments // services
+kubectl create deployment // cm // secret
+kubectl delete service // kubectl delete deployments
+
+Create a Deployment
+docker build --no-cache -t ilouckov/k8s-first-app . (flag forces clean rebuild)
+docker push ilouckov/k8s-first-app
+kubectl create deployment k8s-first-app --image=ilouckov/k8s-first-app 
+kubectl delete deployment k8s-first-app
+
+Expose a Deployment with a Service
+kubectl expose deployment k8s-first-app --type=LoadBalancer --port=8080
+# minikube service --url opens a tunnel from your localhost to the NodePort
+minikube service k8s-first-app
+
+Scaling Deployment
+kubectl scale deployment/nginx --replicas=3
+
+Update Deployment
+kubectl describe pod | grep container
+kubectl set image deployment/k8s-first-app k8s-first-app=ilouckov/k8s-first-app:updated
+kubectl rollout status deployment/k8s-first-app
+
+Rollback Deployment
+kubectl rollout history 
+kubectl rollout history deployment/k8s-first-app
+kubectl rollout history deployment/k8s-first-app --revision=3
+kubectl rollout undo deployment/k8s-first-app --to-revision=1
+
+Update and Remove Resoures 
+kubectl apply -f=deployment.yaml
+kubectl delete -f=deployment.yaml
+
+kubectl create cm --from-file=app-config.properties 
+
+kubectl create secret generic NAME \
+  --from-literal=username=... \
+  --from-literal=password=... \ 
+  --from-file=ssh-privatekey=path/to/key
+
+minikube service users-service for testing API in Postman
+
+
+Build image:
+docker-compose build --no-cache composer/server/...
+
+Start with build:
+docker-compose up --build -d server
+
+Run utility container:
+docker-compose run --rm artisan migrate (writes data into db = check db works)
+
+
+Common runtime images that set ENTRYPOINT: 
+gcr.io/distroless/nodejs
+gcr.io/distroless/python3
+gcr.io/distroless/java 
+
+- Bind Mounts = map host dir into container, used in dev & test, live code updates
+  Docker CLI => -v /host/path:/container/path 
+- Named volumes = for persisting app data, reused easily across containers / restarts
+  Docker CLI => -v volume_name:/container/path 
+- Anonymous volumes = temp data, harder to reuse
+  Dockerfile => VOLUME /data
+  Dcoker CLI => -v /container/path 
+
+- Pod = smallest unit in K8s that runs containerized app
+- Service → Exposes app to the cluster / outside world (externally)
+- Deployment = manages pods and makes sure they stay running 
+- ReplicaSet = mechanism that creates and scales pods to match Deployment
+replicaset.apps/express-app-56c8d79897 → Ensures the right number of pods are running.
+
+npm init (create package) // npm install // npm run build
+
+docker run --network mynetwork ...
+
+pod.yaml
+deployment.yaml
+
+- emptyDir Volume Type = for cached temp data between restarts/containers in Pod
+- hostPath Volume Type = maps file/dir from host to Pod, tied to Node, not to Pod
+- CSI Volume Type = attach any storage solution which has existing integration (e.g. EFS)
+They are destroyed when a Pod is removed.
+
+Pod/Node independent Volumes are required. ===> Persistent Volumes
+
+
+kubectl create deployment my-deploy \
+--image=myimage:tag --replicas=3
+
+kubectl run my-pod \
+--image=myimage:tag --port=8080 --restart=Never
+
+kubectl expose deployment my-deploy \
+--port=80 --type=LoadBalancer
+
+kubectl create namespace my-namespace
+
+kubectl create cm my-config --from-file=app-config.properties
+
+kubectl create secret generic my-secret \
+--from-literal=username=admin \
+--from-literal=password=123456
+
+kubectl create pvc my-pvc \
+--access-modes=ReadWriteOnce --resources=requests.storage=5Gi \
+--dry-run=client -o yaml
+
+kubectl apply -f deployment.yaml
+kubectl set image deployment/my-deploy my-container=myimage:tag
+kubectl scale deployment/my-deploy --replicas=3
+kubectl delete deployment my-deploy
+kubectl delete -f deployment.yaml
+
+kubectl rollout status deployment/my-deploy
+kubectl rollout undo deployment/my-deploy
+kubectl rollout history deployment/my-deploy
+
+kubectl get pods // kubectl get svc // kubectl get nodes // kubectl get deployments ... 
+kubectl describe pod my-pod // kubectl describe svc my-service
+kubectl logs my-pod
+kubectl exec -it my-pod -- sh
